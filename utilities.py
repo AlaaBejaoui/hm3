@@ -39,8 +39,8 @@ def create_checkbox(name, key, method=None, col=None):
     
     return button_dict[method]
 
-def add_slider(label,min_value, max_value, step, value):
-    return st.slider(label=label, min_value=min_value, max_value=max_value, step=step, value=value)
+def add_slider(label,min_value, max_value, step, value, key):
+    return st.slider(label=label, min_value=min_value, max_value=max_value, step=step, value=value, key=key)
 
 def add_seperation_line():
     return st.write('---')

@@ -169,9 +169,16 @@ def blatt_04_P_02():
         max_value = np.r_[z_bottom,z_top,z_m].max()
 
         fig = go.FigureWidget(data=[
-        go.Surface(x=x, y=y, z=z_bottom, showscale=False, cmin=min_value, cmax=max_value),
-        go.Surface(x=x, y=y, z=z_top, showscale=False, cmin=min_value, cmax=max_value),
-        go.Surface(x=x_m, y=y_m, z=z_m, showscale=False, cmin=min_value, cmax=max_value)
+            go.Surface(x=x, y=y, z=z_bottom, showscale=False, cmin=min_value, cmax=max_value),
+            go.Surface(x=x, y=y, z=z_top, showscale=False, cmin=min_value, cmax=max_value),
+            go.Surface(x=x_m, y=y_m, z=z_m, showscale=False, cmin=min_value, cmax=max_value),
+            go.Cone(
+                x=list(x_v),
+                y=list(y_v),
+                z=list(z_v),
+                u=list(u_v),
+                v=list(v_v),
+                w=list(w_v), showscale=False, cmin=min_value, cmax=max_value)
         ])
 
         fig.update_layout(autosize=False,
@@ -198,11 +205,23 @@ def blatt_04_P_03():
         z_v = z_v.reshape(-1)
 
         u_v = y_v - z_v
-        v_v = 2*x_v - z_v
+        v_v = 2*x_v + z_v
         w_v = x_v*y_v
 
+        min_value = np.r_[z].min()
+        max_value = np.r_[z].max()
+
         fig = go.Figure(data=[
-        go.Surface(x=x, y=y, z=z, showscale=False)
+        go.Surface(x=x, y=y, z=z, showscale=False, cmin=min_value, cmax=max_value),
+            go.Cone(
+                x=list(x_v),
+                y=list(y_v),
+                z=list(z_v),
+                u=list(u_v),
+                v=list(v_v),
+                w=list(w_v),
+                showscale=False,
+            cmin=min_value, cmax=max_value)
         ])
 
         fig.update_layout(autosize=False,
@@ -249,7 +268,15 @@ def blatt_04_H_01():
         go.Surface(x=x_matrix, y=y_matrix, z=z_top, showscale=False, cmin=min_value, cmax=max_value),
         go.Surface(x=x_matrix, y=y_matrix, z=z_bottom, showscale=False, cmin=min_value, cmax=max_value),
         go.Surface(x=x_m, y=y_m, z=z_m, showscale=False, cmin=min_value, cmax=max_value),
-        go.Surface(x=-x_m, y=y_m, z=z_m, showscale=False, cmin=min_value, cmax=max_value)
+        go.Surface(x=-x_m, y=y_m, z=z_m, showscale=False, cmin=min_value, cmax=max_value),
+            go.Cone(
+                x=list(x_v),
+                y=list(y_v),
+                z=list(z_v),
+                u=list(u_v),
+                v=list(v_v),
+                w=list(w_v),
+                showscale=False, cmin=min_value, cmax=max_value)
         ])
 
         fig.update_layout(autosize=False,
@@ -275,12 +302,25 @@ def blatt_05_P_02(n):
           a_i = a_k(i)
           b_i = b_k(i)
           f_tilde += (a_i*np.cos(i*x) + b_i*np.sin(i*x))
-        f_tilde += (a_0/2)      
+        f_tilde += (a_0/2)
+
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
+        fig.add_trace(go.Scatter(x=x, y=f_tilde, name=" F(f)(x)", line_shape='linear'))
+        fig.update_layout(title={'text': f"n = {n}",
+                                 'y': 0.9,
+                                 'x': 0.5,
+                                 'xanchor': 'center',
+                                 'yanchor': 'top'},
+                          xaxis_title="x",
+                          yaxis_title="y")
+
+
         
-        fig = plt.figure(figsize=(4, 2))   
-        plt.plot(x, f, label="f(x)")
-        plt.plot(x, f_tilde, label="Fourier Reihe")
-        plt.legend(loc="upper right")
+        # fig = plt.figure(figsize=(4, 2))
+        # plt.plot(x, f, label="f(x)")
+        # plt.plot(x, f_tilde, label="Fourier Reihe")
+        # plt.legend(loc="upper right")
         
         return fig
 
@@ -305,13 +345,103 @@ def blatt_05_P_03(n):
         
         f_tilde += (a_0/2)
 
-        fig = plt.figure(figsize=(4, 2))
-        plt.plot(x, f, label="f(x)")
-        plt.plot(x, f_tilde, label="Fourier Reihe")
-        plt.legend(loc="upper right")
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
+        fig.add_trace(go.Scatter(x=x, y=f_tilde, name=" F(f)(x)", line_shape='linear'))
+        fig.update_layout(title={'text': f"n = {n}",
+                                 'y': 0.9,
+                                 'x': 0.5,
+                                 'xanchor': 'center',
+                                 'yanchor': 'top'},
+                          xaxis_title="x",
+                          yaxis_title="y")
+
+
+        # fig = plt.figure(figsize=(4, 2))
+        # plt.plot(x, f, label="f(x)")
+        # plt.plot(x, f_tilde, label="Fourier Reihe")
+        # plt.legend(loc="upper right")
         
         return fig
 
+
+def blatt_05_H_01_1(n):
+    x_ = np.linspace(0, 2, 100)
+    y_ = (2*x_) * np.logical_and((x_ >= 0), (x_ <= 1/2)) + (2*(1-x_)) * np.logical_and((x_ >= 1/2), (x_<= 1)) \
+         + (-2 + 2*x_) * np.logical_and((x_ >= 1), (x_<= 3/2)) + (4-2*x_) * np.logical_and((x_ >= 3/2), (x_<= 2))
+
+    x = np.linspace(-4, 4, 4 * 100)
+    f = np.array([y_ for _ in range(4)]).reshape(-1)
+
+    a_0 = 1
+    a_k = lambda k: (4 / ((np.pi**2) * (k ** 2))) * ((2*np.cos((k*np.pi)/2)) - np.cos(k*np.pi) -1)
+    b_k = lambda k: 0
+
+    f_tilde = np.zeros_like(x)
+    for i in range(1, n):
+        a_i = a_k(i)
+        b_i = b_k(i)
+        f_tilde += (a_i * np.cos(i*np.pi * x) + b_i * np.sin(i*np.pi* x))
+
+    f_tilde += (a_0 / 2)
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
+    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=" F(f)(x)", line_shape='linear'))
+    fig.update_layout(title={'text': f"L = 1, P = 2, n = {n}",
+                             'y': 0.9,
+                             'x': 0.5,
+                             'xanchor': 'center',
+                             'yanchor': 'top'},
+                      xaxis_title="x",
+                      yaxis_title="y")
+
+
+    # fig = plt.figure(figsize=(4, 2))
+    # plt.plot(x, f, label="f(x)")
+    # plt.plot(x, f_tilde, label="Fourier Reihe")
+    # plt.legend(loc="upper right")
+
+    return fig
+
+def blatt_05_H_01_2(n):
+    x_ = np.linspace(0, 2, 100)
+    y_ = (2*x_) * np.logical_and((x_ >= 0), (x_ <= 1/2)) + (2*(1-x_)) * np.logical_and((x_ >= 1/2), (x_<= 1)) \
+         + (2 - 2*x_) * np.logical_and((x_ >= 1), (x_<= 3/2)) + (-4+2*x_) * np.logical_and((x_ >= 3/2), (x_<= 2))
+
+    x = np.linspace(-4, 4, 4 * 100)
+    f = np.array([y_ for _ in range(4)]).reshape(-1)
+
+    a_0 = 0
+    a_k = lambda k: 0
+    b_k = lambda k: (-4 / ((np.pi**2) * (k ** 2))) * (np.sin((3*k*np.pi)/2)-np.sin((k*np.pi)/2))
+
+    f_tilde = np.zeros_like(x)
+    for i in range(1, n):
+        a_i = a_k(i)
+        b_i = b_k(i)
+        f_tilde += (a_i * np.cos(i*np.pi * x) + b_i * np.sin(i*np.pi* x))
+
+    f_tilde += (a_0 / 2)
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=x, y=f, name="g(x)", line_shape='linear'))
+    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=" F(g)(x)", line_shape='linear'))
+    fig.update_layout(title={'text': f"L = 1, P = 2, n = {n}",
+                             'y': 0.9,
+                             'x': 0.5,
+                             'xanchor': 'center',
+                             'yanchor': 'top'},
+                      xaxis_title="x",
+                      yaxis_title="y")
+
+
+    # fig = plt.figure(figsize=(4, 2))
+    # plt.plot(x, f, label="f(x)")
+    # plt.plot(x, f_tilde, label="Fourier Reihe")
+    # plt.legend(loc="upper right")
+
+    return fig
 
 def add_plot(plot_ref):
         return st.plotly_chart(plot_ref, use_container_width=True)
