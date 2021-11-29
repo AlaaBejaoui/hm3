@@ -2,7 +2,7 @@ from utilities import *
 from plots import *
 import datetime
 
-add_title(title="hm-interactive", color="blue", align="center", fontsize=40)
+add_title(title="HM3 - interaktive Graphiken", color="blue", align="center", fontsize=40)
 
 ### Blatt 2 ###
 
@@ -38,8 +38,8 @@ add_seperation_line()
 
 ### Blatt 4 ###
 
-add_sheet(title="Blatt 4: Durchs wilde KuRdistan", color="green", align="center", fontsize=30)
-
+add_sheet(title="Durchs wilde KuR3distan" , color="green", align="center", fontsize=30)
+# Blatt 4: Durchs wilde Ku$\R$distan"
 ### Aufgabe P2
 
 add_exercise('Aufgabe P2:', color="black", align="left", fontsize=20) 
