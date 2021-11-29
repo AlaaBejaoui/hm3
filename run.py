@@ -38,7 +38,7 @@ add_seperation_line()
 
 ### Blatt 4 ###
 
-add_sheet(title="Durchs wilde KuR3distan" , color="green", align="center", fontsize=30)
+add_sheet(title="Blatt 4: Durchs wilde KuR3distan" , color="green", align="center", fontsize=30)
 # Blatt 4: Durchs wilde Ku$\R$distan"
 ### Aufgabe P2
 
