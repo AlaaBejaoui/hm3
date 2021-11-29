@@ -287,10 +287,10 @@ def blatt_04_H_01():
 
 def blatt_05_P_02(n):
     
-        x_ = np.linspace(-np.pi, np.pi, 100)
+        x_ = np.linspace(-np.pi, np.pi, 300)
         y_ = 0 * (x_<0) + np.exp(-x_) * (x_>0)
 
-        x = np.linspace(-3*np.pi, 3*np.pi, 3*100)
+        x = np.linspace(-3*np.pi, 3*np.pi, 3*300)
         f = np.array([y_ for _ in range(3)]).reshape(-1)
 
         a_0 = (1/np.pi) * (1-np.exp(-np.pi))
@@ -306,7 +306,7 @@ def blatt_05_P_02(n):
 
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
-        fig.add_trace(go.Scatter(x=x, y=f_tilde, name=" F(f)(x)", line_shape='linear'))
+        fig.add_trace(go.Scatter(x=x, y=f_tilde, name= r"F(f)(x)", line_shape='linear')) 
         fig.update_layout(title={'text': f"n = {n}",
                                  'y': 0.9,
                                  'x': 0.5,
@@ -326,10 +326,10 @@ def blatt_05_P_02(n):
 
 def blatt_05_P_03(n):
 
-        x_ = np.linspace(-np.pi, np.pi, 100)
+        x_ = np.linspace(-np.pi, np.pi, 300)
         y_ = (np.pi+x_) * (x_<0) + (np.pi-x_) * (x_>0)
 
-        x = np.linspace(-3*np.pi, 3*np.pi, 3*100)
+        x = np.linspace(-3*np.pi, 3*np.pi, 3*300)
         f = np.array([y_ for _ in range(3)]).reshape(-1)
 
         a_0 = np.pi
@@ -366,11 +366,11 @@ def blatt_05_P_03(n):
 
 
 def blatt_05_H_01_1(n):
-    x_ = np.linspace(0, 2, 100)
+    x_ = np.linspace(0, 2, 300)
     y_ = (2*x_) * np.logical_and((x_ >= 0), (x_ <= 1/2)) + (2*(1-x_)) * np.logical_and((x_ >= 1/2), (x_<= 1)) \
          + (-2 + 2*x_) * np.logical_and((x_ >= 1), (x_<= 3/2)) + (4-2*x_) * np.logical_and((x_ >= 3/2), (x_<= 2))
 
-    x = np.linspace(-4, 4, 4 * 100)
+    x = np.linspace(-4, 4, 4 * 300)
     f = np.array([y_ for _ in range(4)]).reshape(-1)
 
     a_0 = 1
@@ -405,11 +405,11 @@ def blatt_05_H_01_1(n):
     return fig
 
 def blatt_05_H_01_2(n):
-    x_ = np.linspace(0, 2, 100)
+    x_ = np.linspace(0, 2, 300)
     y_ = (2*x_) * np.logical_and((x_ >= 0), (x_ <= 1/2)) + (2*(1-x_)) * np.logical_and((x_ >= 1/2), (x_<= 1)) \
          + (2 - 2*x_) * np.logical_and((x_ >= 1), (x_<= 3/2)) + (-4+2*x_) * np.logical_and((x_ >= 3/2), (x_<= 2))
 
-    x = np.linspace(-4, 4, 4 * 100)
+    x = np.linspace(-4, 4, 4 * 300)
     f = np.array([y_ for _ in range(4)]).reshape(-1)
 
     a_0 = 0
