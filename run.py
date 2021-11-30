@@ -3,6 +3,7 @@ from plots import *
 import datetime
 
 add_title(title="HM3 - interaktive Graphiken", color="blue", align="center", fontsize=40)
+add_title(title="Alaa Bejaoui - Maha Badri", color="red", align="center", fontsize=15)
 
 ### Blatt 2 ###
 
