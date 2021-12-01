@@ -306,7 +306,7 @@ def blatt_05_P_02(n):
 
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
-        fig.add_trace(go.Scatter(x=x, y=f_tilde, name= "f_x", line_shape='linear')) 
+        fig.add_trace(go.Scatter(x=x, y=f_tilde, name= "f_n(x)", line_shape='linear')) 
         fig.update_layout(title={'text': f"n = {n}",
                                  'y': 0.9,
                                  'x': 0.5,
@@ -347,7 +347,7 @@ def blatt_05_P_03(n):
 
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
-        fig.add_trace(go.Scatter(x=x, y=f_tilde, name="f_x", line_shape='linear'))
+        fig.add_trace(go.Scatter(x=x, y=f_tilde, name="f_n(x)", line_shape='linear'))
         fig.update_layout(title={'text': f"n = {n}",
                                  'y': 0.9,
                                  'x': 0.5,
@@ -387,11 +387,11 @@ def blatt_05_H_01_1(n):
 
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
-    fig.add_trace(go.Scatter(x=x, y=f_tilde, name="f_x", line_shape='linear'))
+    fig.add_trace(go.Scatter(x=x, y=f_tilde, name="f_n(x)", line_shape='linear'))
     fig.update_layout(title={'text': f"L = 1, P = 2, n = {n}",
                              'y': 0.9,
                              'x': 0.5,
-                             'xanchor': 'center',
+                             'xanchor': 'center',-
                              'yanchor': 'top'},
                       xaxis_title="x",
                       yaxis_title="y")
