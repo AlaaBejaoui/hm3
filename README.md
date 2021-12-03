@@ -2,11 +2,11 @@
 
 ## Installation
 1. Download [Anaconda](https://www.anaconda.com/products/individual)
-2. Create the conda environment 
+2. Create the conda environment hm3
 ```bash
 $ conda env create --file env.yml
 ```
-3. Activate the conda environment 
+3. Activate the conda environment hm3
 ```bash
 $ conda env activate hm3
 ```
