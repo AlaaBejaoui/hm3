@@ -1,5 +1,6 @@
 import numpy as np
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import streamlit as st
 
 
@@ -303,18 +304,29 @@ def blatt_05_P_02(n):
         a_i = a_k(i)
         b_i = b_k(i)
         f_tilde += (a_i * np.cos(i * x) + b_i * np.sin(i * x))
+
     f_tilde += (a_0 / 2)
 
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
-    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"f_{n}(x)", line_shape='linear'))
+    error = f - f_tilde
+
+    # fig = go.Figure()
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True)
+    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"f_{n}(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=error, name=f"f(x) - f_{n}(x)", line_shape='linear'),
+                  row=2, col=1)
     fig.update_layout(title={'text': f"n = {n}",
                              'y': 0.9,
                              'x': 0.5,
                              'xanchor': 'center',
-                             'yanchor': 'top'},
-                      xaxis_title="x",
-                      yaxis_title="y")
+                             'yanchor': 'top'})
+    fig.update_xaxes(title_text="x", row=2, col=1)
+    fig.update_yaxes(title_text="y", row=1, col=1)
+    # fig.update_yaxes(title_text="Fehler", range=[-1, 1], row=2, col=1)
+    fig.update_yaxes(title_text="Fehler", row=2, col=1)
+
 
     # fig = plt.figure(figsize=(4, 2))
     # plt.plot(x, f, label="f(x)")
@@ -343,16 +355,25 @@ def blatt_05_P_03(n):
 
     f_tilde += (a_0 / 2)
 
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
-    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"f_{n}(x)", line_shape='linear'))
+    error = f - f_tilde
+
+    # fig = go.Figure()
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True)
+    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"f_{n}(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=error, name=f"f(x) - f_{n}(x)", line_shape='linear'),
+                  row=2, col=1)
     fig.update_layout(title={'text': f"n = {n}",
                              'y': 0.9,
                              'x': 0.5,
                              'xanchor': 'center',
-                             'yanchor': 'top'},
-                      xaxis_title="x",
-                      yaxis_title="y")
+                             'yanchor': 'top'})
+    fig.update_xaxes(title_text="x", row=2, col=1)
+    fig.update_yaxes(title_text="y", row=1, col=1)
+    # fig.update_yaxes(title_text="Fehler", range=[-1, 1], row=2, col=1)
+    fig.update_yaxes(title_text="Fehler", row=2, col=1)
 
     # fig = plt.figure(figsize=(4, 2))
     # plt.plot(x, f, label="f(x)")
@@ -383,16 +404,25 @@ def blatt_05_H_01_1(n):
 
     f_tilde += (a_0 / 2)
 
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'))
-    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"f_{n}(x)", line_shape='linear'))
-    fig.update_layout(title={'text': f"L = 1, P = 2, n = {n}",
+    error = f - f_tilde
+
+    # fig = go.Figure()
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True)
+    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"f_{n}(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=error, name=f"f(x) - f_{n}(x)", line_shape='linear'),
+                  row=2, col=1)
+    fig.update_layout(title={'text': f"n = {n}",
                              'y': 0.9,
                              'x': 0.5,
                              'xanchor': 'center',
-                             'yanchor': 'top'},
-                      xaxis_title="x",
-                      yaxis_title="y")
+                             'yanchor': 'top'})
+    fig.update_xaxes(title_text="x", row=2, col=1)
+    fig.update_yaxes(title_text="y", row=1, col=1)
+    # fig.update_yaxes(title_text="Fehler", range=[-1, 1], row=2, col=1)
+    fig.update_yaxes(title_text="Fehler", row=2, col=1)
 
     # fig = plt.figure(figsize=(4, 2))
     # plt.plot(x, f, label="f(x)")
@@ -423,16 +453,123 @@ def blatt_05_H_01_2(n):
 
     f_tilde += (a_0 / 2)
 
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=x, y=f, name="g(x)", line_shape='linear'))
-    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"g_{n}(x)", line_shape='linear'))
-    fig.update_layout(title={'text': f"L = 1, P = 2, n = {n}",
+    error = f - f_tilde
+
+    # fig = go.Figure()
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True)
+    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"f_{n}(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=error, name=f"f(x) - f_{n}(x)", line_shape='linear'),
+                  row=2, col=1)
+    fig.update_layout(title={'text': f"n = {n}",
                              'y': 0.9,
                              'x': 0.5,
                              'xanchor': 'center',
-                             'yanchor': 'top'},
-                      xaxis_title="x",
-                      yaxis_title="y")
+                             'yanchor': 'top'})
+    fig.update_xaxes(title_text="x", row=2, col=1)
+    fig.update_yaxes(title_text="y", row=1, col=1)
+    # fig.update_yaxes(title_text="Fehler", range=[-1, 1], row=2, col=1)
+    fig.update_yaxes(title_text="Fehler", row=2, col=1)
+
+    # fig = plt.figure(figsize=(4, 2))
+    # plt.plot(x, f, label="f(x)")
+    # plt.plot(x, f_tilde, label="Fourier Reihe")
+    # plt.legend(loc="upper right")
+
+    return fig
+
+
+def blatt_06_P_01(n):
+    x_ = np.linspace(-np.pi, np.pi, 300)
+    y_ = (np.cos(x_)**2)
+
+    x = np.linspace(-3 * np.pi, 3 * np.pi, 3 * 300)
+    f = np.array([y_ for _ in range(3)]).reshape(-1)
+
+    a_0 = 1
+    a_k = lambda k: 0.5 if k == 2 else 0
+    b_k = lambda k: 0
+
+    f_tilde = np.zeros_like(x)
+    for i in range(1, n):
+        a_i = a_k(i)
+        b_i = b_k(i)
+        f_tilde += (a_i * np.cos(i * x) + b_i * np.sin(i * x))
+
+    f_tilde += (a_0 / 2)
+    f_3 = 0.5 + 0.5*np.cos(2*x)
+    error = f - f_tilde
+
+    # fig = go.Figure()
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True)
+    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'),
+                  row=1, col=1)
+    # fig.add_trace(go.Scatter(x=x, y=f_3, name=f"0.5 + 0.5*cos(2*x)", line_shape='linear'),
+    #               row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"f_{n}(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=error, name=f"f(x) - f_{n}(x)", line_shape='linear'),
+                  row=2, col=1)
+    fig.update_layout(title={'text': f"n = {n}",
+                             'y': 0.9,
+                             'x': 0.5,
+                             'xanchor': 'center',
+                             'yanchor': 'top'})
+    fig.update_xaxes(title_text="x", row=2, col=1)
+    fig.update_yaxes(title_text="y", row=1, col=1)
+    # fig.update_yaxes(title_text="Fehler", range=[-1, 1], row=2, col=1)
+    fig.update_yaxes(title_text="Fehler", row=2, col=1)
+
+    # fig = plt.figure(figsize=(4, 2))
+    # plt.plot(x, f, label="f(x)")
+    # plt.plot(x, f_tilde, label="Fourier Reihe")
+    # plt.legend(loc="upper right")
+
+    return fig
+
+
+def blatt_06_H_02(n):
+    x_ = np.linspace(-np.pi, np.pi, 300)
+    y_ = (np.sin(x_)**4)
+
+    x = np.linspace(-3 * np.pi, 3 * np.pi, 3 * 300)
+    f = np.array([y_ for _ in range(3)]).reshape(-1)
+
+    a_0 = 3/4
+    a_k = lambda k: -0.5 if k == 2 else (1/8 if k == 4 else 0)
+    b_k = lambda k: 0
+
+    f_tilde = np.zeros_like(x)
+    for i in range(1, n):
+        a_i = a_k(i)
+        b_i = b_k(i)
+        f_tilde += (a_i * np.cos(i * x) + b_i * np.sin(i * x))
+
+    f_tilde += (a_0 / 2)
+    f_5 = (1/8)*np.cos(4*x) - (1/2)*np.cos(2*x) + (3/8)
+    error = f - f_tilde
+
+    # fig = go.Figure()
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True)
+    fig.add_trace(go.Scatter(x=x, y=f, name="f(x)", line_shape='linear'),
+                  row=1, col=1)
+    # fig.add_trace(go.Scatter(x=x, y=f_5, name=f"(1/8)*cos(4*x) - (1/2)*cos(2*x) + (3/8)", line_shape='linear'),
+    #               row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=f_tilde, name=f"f_{n}(x)", line_shape='linear'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=x, y=error, name=f"f(x) - f_{n}(x)", line_shape='linear'),
+                  row=2, col=1)
+    fig.update_layout(title={'text': f"n = {n}",
+                             'y': 0.9,
+                             'x': 0.5,
+                             'xanchor': 'center',
+                             'yanchor': 'top'})
+    fig.update_xaxes(title_text="x", row=2, col=1)
+    fig.update_yaxes(title_text="y", row=1, col=1)
+    # fig.update_yaxes(title_text="Fehler", range=[-1, 1], row=2, col=1)
+    fig.update_yaxes(title_text="Fehler", row=2, col=1)
 
     # fig = plt.figure(figsize=(4, 2))
     # plt.plot(x, f, label="f(x)")

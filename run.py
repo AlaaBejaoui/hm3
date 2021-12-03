@@ -118,6 +118,32 @@ def add_blatt_5():
                      f" um {datetime.datetime(2021, 11, 30, 18, 00).time().strftime(format='%H:%M')} freigeschaltet!")
 
 
+def add_blatt_6():
+    add_sheet(title="Blatt 6: Fast and Fourier")
+
+    # Aufgabe P1
+    add_exercise("Aufgabe P1:")
+    add_equation_in_latex("f(x) = \cos^2(x)")
+    _, col_b_6_p_1, _ = create_columns(3)
+    button_b_6_p_1 = create_checkbox(method="to_column", col=col_b_6_p_1, name="Grafik zeigen", key="6p1")
+    if button_b_6_p_1:
+        n = add_slider(label="Bitte n auswählen", min_value=1, max_value=10, step=1, value=2, key="6p1")
+        add_plot(blatt_06_P_01(n))
+
+    # Aufgabe H2
+    add_exercise("Aufgabe H2:")
+    add_equation_in_latex("f(x) = \sin^4(x)")
+    _, col_b_6_h_2, _ = create_columns(3)
+    button_b_6_h_2 = create_checkbox(method="to_column", col=col_b_6_h_2, name="Grafik zeigen", key="6h2")
+    if button_b_6_h_2:
+        if datetime.datetime.now() >= datetime.datetime(2021, 12, 7, 18, 00):
+            n = add_slider(label="Bitte n auswählen", min_value=1, max_value=10, step=1, value=3, key="6h2")
+            add_plot(blatt_06_H_02(n))
+        else:
+            add_info(f"Grafik wird am {datetime.datetime(2021, 12, 7, 18, 00).date().strftime(format='%d.%m.%y')}"
+                     f" um {datetime.datetime(2021, 12, 7, 18, 00).time().strftime(format='%H:%M')} freigeschaltet!")
+
+
 if __name__ == '__main__':
     # Title and subtitle
     add_title(title="HM3 - interaktive Graphiken")
@@ -133,4 +159,8 @@ if __name__ == '__main__':
 
     # Blatt 5
     add_blatt_5()
+    add_seperation_line()
+
+    # Blatt 6
+    add_blatt_6()
     add_seperation_line()
