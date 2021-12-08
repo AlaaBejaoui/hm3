@@ -55,5 +55,9 @@ def add_slider(label, min_value, max_value, step, value, key):
     return st.slider(label=label, min_value=min_value, max_value=max_value, step=step, value=value, key=key)
 
 
+def add_number_input(label, key):
+    return st.number_input(label=label, key=key)
+
+
 def add_seperation_line():
     return st.write('---')

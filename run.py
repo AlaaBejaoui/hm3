@@ -73,7 +73,7 @@ def add_blatt_5():
     _, col_b_5_p_2, _ = create_columns(3)
     button_b_5_p_2 = create_checkbox(method="to_column", col=col_b_5_p_2, name="Grafik zeigen", key="5p2")
     if button_b_5_p_2:
-        n = add_slider(label="Bitte n auswählen", min_value=1, max_value=50, step=1, value=10, key="5p2")
+        n = add_slider(label="Bitte n auswählen", min_value=0, max_value=50, step=1, value=10, key="5p2")
         add_plot(blatt_05_P_02(n))
 
     # Aufgabe P3
@@ -84,7 +84,7 @@ def add_blatt_5():
     _, col_b_5_p_3, _ = create_columns(3)
     button_b_5_p_3 = create_checkbox(method="to_column", col=col_b_5_p_3, name="Grafik zeigen", key="5p3")
     if button_b_5_p_3:
-        n = add_slider(label="Bitte n auswählen", min_value=1, max_value=50, step=1, value=10, key="5p3")
+        n = add_slider(label="Bitte n auswählen", min_value=0, max_value=50, step=1, value=10, key="5p3")
         add_plot(blatt_05_P_03(n))
 
     # Aufgabe H1 Teil 1
@@ -96,7 +96,7 @@ def add_blatt_5():
     button_b_5_h_1_1 = create_checkbox(method="to_column", col=col_b_5_h_1_1, name="Grafik zeigen", key="5h11")
     if button_b_5_h_1_1:
         if datetime.datetime.now() >= datetime.datetime(2021, 11, 30, 18, 00):
-            n = add_slider(label="Bitte n auswählen", min_value=1, max_value=50, step=1, value=10, key="5h11")
+            n = add_slider(label="Bitte n auswählen", min_value=0, max_value=50, step=1, value=10, key="5h11")
             add_plot(blatt_05_H_01_1(n))
         else:
             add_info(f"Grafik wird am {datetime.datetime(2021, 11, 30, 18, 00).date().strftime(format='%d.%m.%y')}"
@@ -111,7 +111,7 @@ def add_blatt_5():
     button_b_5_h_1_2 = create_checkbox(method="to_column", col=col_b_5_h_1_2, name="Grafik zeigen", key="5h12")
     if button_b_5_h_1_2:
         if datetime.datetime.now() >= datetime.datetime(2021, 11, 30, 18, 00):
-            n = add_slider(label="Bitte n auswählen", min_value=1, max_value=50, step=1, value=10, key="5h12")
+            n = add_slider(label="Bitte n auswählen", min_value=0, max_value=50, step=1, value=10, key="5h12")
             add_plot(blatt_05_H_01_2(n))
         else:
             add_info(f"Grafik wird am {datetime.datetime(2021, 11, 30, 18, 00).date().strftime(format='%d.%m.%y')}"
@@ -127,7 +127,7 @@ def add_blatt_6():
     _, col_b_6_p_1, _ = create_columns(3)
     button_b_6_p_1 = create_checkbox(method="to_column", col=col_b_6_p_1, name="Grafik zeigen", key="6p1")
     if button_b_6_p_1:
-        n = add_slider(label="Bitte n auswählen", min_value=1, max_value=10, step=1, value=2, key="6p1")
+        n = add_slider(label="Bitte n auswählen", min_value=0, max_value=10, step=1, value=2, key="6p1")
         add_plot(blatt_06_P_01(n))
 
     # Aufgabe H2
@@ -142,6 +142,19 @@ def add_blatt_6():
         else:
             add_info(f"Grafik wird am {datetime.datetime(2021, 12, 7, 18, 00).date().strftime(format='%d.%m.%y')}"
                      f" um {datetime.datetime(2021, 12, 7, 18, 00).time().strftime(format='%H:%M')} freigeschaltet!")
+
+
+def add_blatt_7():
+    add_sheet(title="Blatt 7: ODE an Laplace")
+
+    # Aufgabe P2
+    add_exercise("Aufgabe P2:")
+    add_equation_in_latex("yy^{\prime} + 2*\sin(x) = 0")
+    _, col_b_7_p_2_1, _ = create_columns(3)
+    button_b_7_p_2_1 = create_checkbox(method="to_column", col=col_b_7_p_2_1, name="Grafik zeigen", key="7p21")
+    if button_b_7_p_2_1:
+        y_0 = add_number_input(label="Bitte y(0) eingeben", key="7p21")
+        add_plot(blatt_07_P_02(y_0))
 
 
 if __name__ == '__main__':
@@ -164,3 +177,7 @@ if __name__ == '__main__':
     # Blatt 6
     add_blatt_6()
     add_seperation_line()
+
+    # Blatt 7
+    # add_blatt_7()
+    # add_seperation_line()

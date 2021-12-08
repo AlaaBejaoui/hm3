@@ -1,7 +1,8 @@
 import numpy as np
+import plotly.figure_factory as ff
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import streamlit as st
+from plotly.subplots import make_subplots
 
 
 def add_plot(plot_ref):
@@ -300,7 +301,7 @@ def blatt_05_P_02(n):
     b_k = lambda k: (k / (np.pi * (1 + k ** 2))) * (1 - ((-1) ** k) * np.exp(-np.pi))
 
     f_tilde = np.zeros_like(x)
-    for i in range(1, n):
+    for i in range(1, n+1):
         a_i = a_k(i)
         b_i = b_k(i)
         f_tilde += (a_i * np.cos(i * x) + b_i * np.sin(i * x))
@@ -327,7 +328,6 @@ def blatt_05_P_02(n):
     # fig.update_yaxes(title_text="Fehler", range=[-1, 1], row=2, col=1)
     fig.update_yaxes(title_text="Fehler", row=2, col=1)
 
-
     # fig = plt.figure(figsize=(4, 2))
     # plt.plot(x, f, label="f(x)")
     # plt.plot(x, f_tilde, label="Fourier Reihe")
@@ -348,7 +348,7 @@ def blatt_05_P_03(n):
     b_k = lambda k: 0
 
     f_tilde = np.zeros_like(x)
-    for i in range(1, n):
+    for i in range(1, n+1):
         a_i = a_k(i)
         b_i = b_k(i)
         f_tilde += (a_i * np.cos(i * x) + b_i * np.sin(i * x))
@@ -397,7 +397,7 @@ def blatt_05_H_01_1(n):
     b_k = lambda k: 0
 
     f_tilde = np.zeros_like(x)
-    for i in range(1, n):
+    for i in range(1, n+1):
         a_i = a_k(i)
         b_i = b_k(i)
         f_tilde += (a_i * np.cos(i * np.pi * x) + b_i * np.sin(i * np.pi * x))
@@ -446,7 +446,7 @@ def blatt_05_H_01_2(n):
     b_k = lambda k: (-4 / ((np.pi ** 2) * (k ** 2))) * (np.sin((3 * k * np.pi) / 2) - np.sin((k * np.pi) / 2))
 
     f_tilde = np.zeros_like(x)
-    for i in range(1, n):
+    for i in range(1, n+1):
         a_i = a_k(i)
         b_i = b_k(i)
         f_tilde += (a_i * np.cos(i * np.pi * x) + b_i * np.sin(i * np.pi * x))
@@ -482,24 +482,21 @@ def blatt_05_H_01_2(n):
 
 
 def blatt_06_P_01(n):
-    x_ = np.linspace(-np.pi, np.pi, 300)
-    y_ = (np.cos(x_)**2)
-
-    x = np.linspace(-3 * np.pi, 3 * np.pi, 3 * 300)
-    f = np.array([y_ for _ in range(3)]).reshape(-1)
+    x = np.linspace(-3*np.pi, 3*np.pi, 1000)
+    f = np.cos(x) ** 2
 
     a_0 = 1
     a_k = lambda k: 0.5 if k == 2 else 0
     b_k = lambda k: 0
 
     f_tilde = np.zeros_like(x)
-    for i in range(1, n):
+    for i in range(1, n+1):
         a_i = a_k(i)
         b_i = b_k(i)
         f_tilde += (a_i * np.cos(i * x) + b_i * np.sin(i * x))
 
     f_tilde += (a_0 / 2)
-    f_3 = 0.5 + 0.5*np.cos(2*x)
+    # f_2 = 0.5 + 0.5 * np.cos(2 * x)
     error = f - f_tilde
 
     # fig = go.Figure()
@@ -531,24 +528,21 @@ def blatt_06_P_01(n):
 
 
 def blatt_06_H_02(n):
-    x_ = np.linspace(-np.pi, np.pi, 300)
-    y_ = (np.sin(x_)**4)
+    x = np.linspace(-3*np.pi, 3*np.pi, 1000)
+    f = np.sin(x) ** 4
 
-    x = np.linspace(-3 * np.pi, 3 * np.pi, 3 * 300)
-    f = np.array([y_ for _ in range(3)]).reshape(-1)
-
-    a_0 = 3/4
-    a_k = lambda k: -0.5 if k == 2 else (1/8 if k == 4 else 0)
+    a_0 = 3 / 4
+    a_k = lambda k: -0.5 if k == 2 else (1 / 8 if k == 4 else 0)
     b_k = lambda k: 0
 
     f_tilde = np.zeros_like(x)
-    for i in range(1, n):
+    for i in range(1, n+1):
         a_i = a_k(i)
         b_i = b_k(i)
         f_tilde += (a_i * np.cos(i * x) + b_i * np.sin(i * x))
 
     f_tilde += (a_0 / 2)
-    f_5 = (1/8)*np.cos(4*x) - (1/2)*np.cos(2*x) + (3/8)
+    # f_4 = (1 / 8) * np.cos(4 * x) - (1 / 2) * np.cos(2 * x) + (3 / 8)
     error = f - f_tilde
 
     # fig = go.Figure()
@@ -575,5 +569,24 @@ def blatt_06_H_02(n):
     # plt.plot(x, f, label="f(x)")
     # plt.plot(x, f_tilde, label="Fourier Reihe")
     # plt.legend(loc="upper right")
+
+    return fig
+
+
+def blatt_07_P_02(y_0=0):
+    x = np.linspace(-5, 5, 15)
+    y = np.linspace(-5, 5, 15)
+    X, Y = np.meshgrid(x, y)
+
+    f = -2 * np.sin(X) / Y
+    u = np.ones_like(f)
+    v = f
+    fig = ff.create_quiver(X, Y, u, v,
+                           scale=0.15,
+                           arrow_scale=0.2,
+                           name="f(x,y)",
+                           line_width=1)
+    g = np.sqrt(4*np.cos(x)+4-y_0)
+    fig.add_trace(go.Scatter(x=x, y=g, name="y(x)", line_shape='linear'))
 
     return fig
